@@ -10,6 +10,7 @@ word = words[randint(0, len(words)-1)].upper()
 guessed_letters = []
 win = False
 fail_count = 0
+oops = ''
 display_word = "_ " * len(word)
 available_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -49,7 +50,8 @@ while fail_count != 6 and not win:
     # Show the word progress 
     # The underscore or the letter to show the progress of how many has been guessed 
     print(display_hangman(fail_count))
-    
+    print(oops) # print error message
+    opps = '' # reset error message
     print(" ".join(display_word), '\n')
     
     print(" ".join([letter for letter in available_letters if letter not in guessed_letters]))
@@ -58,14 +60,13 @@ while fail_count != 6 and not win:
 
     # Add it to our guessed letters 
     if guess in guessed_letters:
-        print(f"You already guessed this letter: {guess}")
+        oops = f"You already guessed this letter: {guess}"
     else:
         guessed_letters.append(guess)
         if guess in word:
             count = word.count(guess)
             print(f"Correct! {guess} is in the word exactly {count} time{'s' if count > 1 else ''}")
             display_word = " ".join(map(lambda ch: ch if ch in guessed_letters else "_", word))
-            print(display_word)
             win = '_' not in display_word
             
         else:
