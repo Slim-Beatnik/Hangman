@@ -3,6 +3,13 @@ from pathlib import Path
 from random import randint
 from time import sleep
 
+from rich.color import Color
+from rich.console import Console
+from rich.panel import Panel
+
+c = Console(color_system="truecolor", theme="monokai", width=80)
+
+
 # text file with list of 7-letter long words - open - r = readonly
 word_file = Path.open("seven_letter_words.txt", "r")
 # we want words to disclude \n (readlines includes newline character)
